@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - CasanovaTech</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #e8fff3, #bff0d4);
+    }
+
+    header, footer {
+      background: #0a946d;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .contact-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #0a946d;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: space-between;
+    }
+
+    .contact-info {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .contact-info i {
+      color: #0a946d;
+      margin-right: 10px;
+    }
+
+    .contact-info a {
+      color: #0a946d;
+      text-decoration: none;
+    }
+
+    .contact-form {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .contact-form button {
+      background: #0a946d;
+      color: white;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background: #087f5a;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: 0;
+      border-radius: 10px;
+      margin-top: 30px;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      font-size: 24px;
+      padding: 14px 16px;
+      border-radius: 50%;
+      text-align: center;
+      z-index: 999;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1><i class="fas fa-envelope-open-text"></i> Contact CasanovaTech Solution</h1>
+  </header>
+
+  <div class="contact-container">
+    <h2>We’d Love to Hear From You</h2>
+    <div class="contact-grid">
+      
+      <div class="contact-info">
+        <p><i class="fas fa-map-marker-alt"></i> Umzinto, KZN, South Africa</p>
+        <p><i class="fas fa-phone"></i> <a href="tel:+27695959841">069 595 9841</a></p>
+        <p><i class="fas fa-envelope"></i> <a href="mailto:casanovatechsolution@gmail.com">casanovatechsolution@gmail.com</a></p>
+        <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/27695959841" target="_blank">WhatsApp Chat</a></p>
+        <p><i class="fas fa-clock"></i> Mon–Sat: 8:00 AM – 6:00 PM</p>
+      </div>
+
+      <div class="contact-form">
+        <form action="#" method="post" onsubmit="submitForm(event)">
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <input type="text" name="subject" placeholder="Subject" />
+          <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+          <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+        </form>
+        <p id="form-status" style="margin-top:10px; font-weight:bold;"></p>
+      </div>
+
+    </div>
+
+    <!-- Google Map (editable link) -->
+    <iframe src="https://maps.google.com/maps?q=umzinto%20south%20africa&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen></iframe>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 CasanovaTech Solution. All rights reserved.</p>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/27695959841" target="_blank" class="whatsapp-float">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    function submitForm(e) {
+      e.preventDefault();
+      document.getElementById('form-status').style.color = 'green';
+      document.getElementById('form-status').innerText = 'Message sent successfully! (Simulation)';
+    }
+  </script>
+
+</body>
+</html>

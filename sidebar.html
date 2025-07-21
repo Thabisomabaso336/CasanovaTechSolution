@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CasanovaTech Menu</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Menu Button */
+    .menu-button {
+      font-size: 28px;
+      cursor: pointer;
+      padding: 15px 20px;
+      background-color: #000;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      transition: background-color 0.3s ease;
+      border-bottom-right-radius: 10px;
+    }
+
+    .menu-button:hover {
+      background-color: #333;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px; /* Hidden initially */
+      height: 100%;
+      width: 250px;
+      background-color: #111;
+      padding-top: 60px;
+      transition: 0.3s;
+      z-index: 998;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .sidebar a {
+      padding: 15px 25px;
+      display: block;
+      color: #f1f1f1;
+      text-decoration: none;
+      font-size: 18px;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+      background-color: #575757;
+    }
+
+    /* Show Sidebar */
+    .sidebar.active {
+      left: 0;
+    }
+
+    /* Optional: Add a close button inside sidebar */
+    .sidebar .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 25px;
+      cursor: pointer;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu Button -->
+  <div class="menu-button" onclick="toggleMenu()">
+    &#9776;
+  </div>
+
+  <!-- Sidebar Menu -->
+  <div id="sidebar" class="sidebar">
+    <span class="close-btn" onclick="toggleMenu()">&times;</span>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="bookings.html">Bookings</a>
+    <a href="about.html">About Us</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="login.html">Login</a>
+  </div>
+
+  <!-- Script to toggle menu -->
+  <script>
+    function toggleMenu() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("active");
+    }
+  </script>
+
+</body>
+</html>

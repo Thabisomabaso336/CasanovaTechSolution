@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Services - CasanovaTech</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+
+    header, footer {
+      background: #0a946d;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      color: #0a946d;
+      margin-bottom: 30px;
+    }
+
+    .service-block {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: #e9fcf8;
+      border-left: 5px solid #0a946d;
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.2s ease;
+      position: relative;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .service-card i {
+      font-size: 30px;
+      color: #0a946d;
+      margin-bottom: 10px;
+    }
+
+    .service-card h3 {
+      color: #0a946d;
+      margin: 10px 0 5px;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    .service-card strong {
+      color: #111;
+      font-size: 16px;
+    }
+
+    .service-card .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #0a946d;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .service-card .btn:hover {
+      background: #087f5a;
+    }
+
+    .make-all-btn {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .make-all-btn a {
+      background: #0a946d;
+      padding: 14px 30px;
+      font-size: 16px;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .make-all-btn a:hover {
+      background: #086e4d;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25d366;
+      color: white;
+      padding: 14px 16px;
+      border-radius: 50%;
+      font-size: 26px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      z-index: 999;
+      text-align: center;
+    }
+
+    .whatsapp-float:hover {
+      background: #1ebd59;
+    }
+
+    @media screen and (max-width: 768px) {
+      .service-card {
+        padding: 15px;
+      }
+
+      .service-card .btn {
+        padding: 8px 16px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Our Services</h1>
+  </header>
+
+  <div class="container">
+    <h2>Explore Our Professional Packages</h2>
+    <div class="service-block">
+
+      <div class="service-card">
+        <i class="fas fa-graduation-cap"></i>
+        <h3>CAO + NSFAS Application</h3>
+        <p>We help with CAO and NSFAS applications – fast and reliable.</p>
+        <strong>R90</strong><br>
+        <a href="bookings.html" class="btn">Make Appointment</a>
+      </div>
+
+      <div class="service-card">
+        <i class="fas fa-university"></i>
+        <h3>University Outside KZN</h3>
+        <p>Applications for institutions outside KwaZulu-Natal.</p>
+        <strong>R80</strong><br>
+        <a href="bookings.html" class="btn">Make Appointment</a>
+      </div>
+
+      <div class="service-card">
+        <i class="fas fa-building"></i>
+        <h3>College Applications</h3>
+        <p>We simplify college applications for you.</p>
+        <strong>R60</strong><br>
+        <a href="bookings.html" class="btn">Make Appointment</a>
+      </div>
+
+      <div class="service-card">
+        <i class="fas fa-keyboard"></i>
+        <h3>Assignment Typing</h3>
+        <p>Professional formatting and typing for assignments.</p>
+        <strong>R90</strong><br>
+        <a href="bookings.html" class="btn">Make Appointment</a>
+      </div>
+
+      <div class="service-card">
+        <i class="fas fa-file-alt"></i>
+        <h3>Resume / CV Typing</h3>
+        <p>Get a clean, modern CV to boost your job chances.</p>
+        <strong>R45</strong><br>
+        <a href="bookings.html" class="btn">Make Appointment</a>
+      </div>
+
+      <div class="service-card">
+        <i class="fas fa-id-card-alt"></i>
+        <h3>Home Affairs Bookings</h3>
+        <p>Book your ID, passport, and other services with ease.</p>
+        <strong>R20</strong><br>
+        <a href="bookings.html" class="btn">Make Appointment</a>
+      </div>
+
+      <div class="service-card">
+        <i class="fas fa-laptop-code"></i>
+        <h3>Windows Update</h3>
+        <p>System refresh and update for better performance.</p>
+        <strong>R200</strong><br>
+        <a href="bookings.html" class="btn">Make Appointment</a>
+
+      </div>
+
+    </div>
+
+    <div class="make-all-btn">
+      <a href="bookings.html">See Full Booking Calendar</a>
+    </div>
+  </div>
+
+  <a href="https://wa.me/27695959841" class="whatsapp-float" title="Chat with us on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <footer>
+    <p>&copy; 2025 CasanovaTech Solution | WhatsApp: 0695959841</p>
+    <!-- Floating WhatsApp Button -->
+<a href="https://wa.me/27695959841" target="_blank" style="position:fixed; bottom:20px; right:20px; background:#25d366; color:white; padding:12px 16px; border-radius:50%; box-shadow: 0 2px 8px rgba(0,0,0,0.2); font-size:24px; z-index:999;">
+    &#x1F4AC;
+  </a>
+  </footer>
+
+</body>
+</html>
+

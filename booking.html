@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book a Service - CasanovaTech</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+    }
+
+    .booking-container {
+      background: white;
+      max-width: 700px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #3cb48c;
+      margin-bottom: 30px;
+    }
+
+    form label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 600;
+    }
+
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-top: 8px;
+    }
+
+    input[type="submit"] {
+      background: #3cb48c;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background: #2f9774;
+    }
+
+    .success-popup {
+      display: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #3cb48c;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="booking-container">
+    <h2>Book Your Service</h2>
+    <form id="bookingForm" action="submit_booking.php" method="POST" enctype="multipart/form-data">
+      <label for="fullName">Full Name</label>
+      <input type="text" name="fullName" id="fullName" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" name="email" id="email" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" name="phone" id="phone" required>
+
+      <label for="service">Select Service</label>
+      <select name="service" id="service" required>
+        <option value="">-- Choose a Service --</option>
+        <option value="CAO Applications">CAO Applications</option>
+        <option value="NSFAS Applications">NSFAS Applications</option>
+        <option value="CV Typing">CV Typing</option>
+        <option value="University Applications">University Applications</option>
+        <option value="Document Uploading">Document Uploading</option>
+      </select>
+
+      <label for="appointmentDate">Preferred Date</label>
+      <input type="date" name="appointmentDate" id="appointmentDate" required>
+
+      <label for="appointmentTime">Preferred Time</label>
+      <input type="time" name="appointmentTime" id="appointmentTime" required>
+
+      <label for="documents">Upload Documents (PDF, ID, etc.)</label>
+      <input type="file" name="documents" id="documents" accept=".pdf,.jpg,.png,.jpeg" required>
+
+      <input type="submit" value="Confirm Booking">
+    </form>
+  </div>
+
+  <div class="success-popup" id="successPopup">Booking submitted successfully!</div>
+
+  <script>
+    // Auto-fill service from URL
+    window.onload = function () {
+      const params = new URLSearchParams(window.location.search);
+      const service = params.get("service");
+      if (service && document.getElementById("service")) {
+        document.getElementById("service").value = decodeURIComponent(service);
+      }
+    };
+
+    // Success message on form submit
+    const form = document.getElementById('bookingForm');
+    const popup = document.getElementById('successPopup');
+    form.addEventListener('submit', function (e) {
+      popup.style.display = 'block';
+      setTimeout(() => {
+        popup.style.display = 'none';
+      }, 4000);
+    });
+  </script>
+
+</body>
+</html>

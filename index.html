@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CasanovaTech - Interactive Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --brand-green:#3cb48c;
+      --brand-lime:#3f9b37;
+      --brand-dark:#1a1919;
+      --brand-light:#f5f5f5de;
+      --radius:10px;
+      --trans:0.3s;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:var(--brand-light);color:#333;line-height:1.4;}
+
+    /* ------------------ SIDEBAR ------------------ */
+    .toggle-btn{position:fixed;left:20px;top:20px;background:var(--brand-green);color:#fff;padding:10px 14px;font-size:20px;border:none;cursor:pointer;border-radius:5px;z-index:1000;transition:var(--trans);}    
+    .toggle-btn:hover{opacity:0.9;}
+
+    .sidebar{position:fixed;top:0;left:-260px;width:240px;height:100%;background:var(--brand-green);color:#fff;padding:30px 20px;transition:var(--trans) ease;z-index:999;display:flex;flex-direction:column;justify-content:space-between;}
+    .sidebar.active{left:0;}
+    .sidebar-header{display:flex;align-items:center;gap:10px;margin-bottom:30px;}
+    .sidebar-header i{font-size:22px;}
+    .sidebar-header h2{font-size:1.5rem;font-weight:600;}
+    .sidebar nav ul{list-style:none;display:flex;flex-direction:column;gap:15px;}
+    .sidebar nav ul li a{color:#fff;text-decoration:none;font-weight:600;transition:var(--trans);}    
+    .sidebar nav ul li a:hover{text-decoration:underline;}
+
+    .sidebar-footer{font-size:0.8rem;opacity:0.8;text-align:center;margin-top:40px;}
+
+    /* ------------------ HEADER BAR ------------------ */
+    .header-bar{display:flex;justify-content:space-between;align-items:center;padding:20px 30px 10px 70px;position:relative;z-index:1;}
+    .header-bar h3{font-size:1.1rem;font-weight:600;display:flex;align-items:center;gap:6px;}
+    .header-bar .register-top{background:var(--brand-lime);color:#fff;padding:10px 16px;border-radius:5px;text-decoration:none;font-weight:600;font-size:14px;transition:var(--trans);}    
+    .header-bar .register-top:hover{opacity:0.9;}
+
+    /* ------------------ POPUP NOTIFICATIONS ------------------ */
+    .popup-wrapper{position:fixed;top:20px;right:20px;z-index:1100;display:flex;flex-direction:column;gap:10px;}
+    .popup{min-width:240px;max-width:300px;background:var(--brand-green);color:#fff;padding:16px 24px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.15);opacity:0;transform:translateY(-20px);transition:all 0.4s ease;font-size:0.95rem;}
+    .popup.show{opacity:1;transform:translateY(0);}
+    .popup.success{background:var(--brand-green);}    
+    .popup.info{background:#2196f3;} 
+    .popup.warning{background:#ff9800;}
+    .popup.error{background:#f44336;}
+
+    /* ------------------ HERO ------------------ */
+    .hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--brand-green),var(--brand-lime));color:#fff;text-align:left;}
+    .hero-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;max-width:1200px;margin:auto;padding:80px 20px;}
+    .hero-text{flex:1 1 400px;padding:20px;}
+    .hero-title{font-size:2.8rem;font-weight:600;margin-bottom:20px;animation:fadeInLeft 1s ease-in-out;}
+    .hero-subtext{font-size:1.1rem;margin-bottom:30px;animation:fadeInUp 1.2s ease-in-out;line-height:1.7;}
+    .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;}
+    .btn-primary{background:#fff;color:var(--brand-green);padding:12px 24px;border-radius:5px;text-decoration:none;font-weight:bold;display:inline-block;transition:var(--trans);}    
+    .btn-primary:hover{background:#e8e8e8;}
+    .btn-outline{background:transparent;border:2px solid #fff;color:#fff;}
+    .btn-outline:hover{background:rgba(255,255,255,0.15);}
+
+    .hero-graphic{flex:1 1 400px;padding:20px;text-align:center;}
+    .hero-graphic img{max-width:85%;height:auto;animation:float 3s ease-in-out infinite;}
+
+    .hero-wave{position:absolute;bottom:0;left:0;width:100%;height:auto;line-height:0;}
+
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+    @keyframes fadeInLeft{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ------------------ LIVE STATS STRIP ------------------ */
+    .live-stats{background:#fff;max-width:1200px;margin:-20px auto 40px auto;padding:20px;border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,0.08);display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;text-align:center;position:relative;z-index:2;}
+    .stat-box{padding:10px 5px;}
+    .stat-box h4{font-size:1.4rem;color:var(--brand-green);}
+    .stat-box p{font-size:0.95rem;opacity:0.85;}
+
+    /* ------------------ SERVICES GRID ------------------ */
+    .services-section{padding:60px 20px;max-width:1200px;margin:auto;text-align:center;}
+    .services-section h2{color:var(--brand-green);margin-bottom:40px;font-size:2rem;}
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
+    .service-card{background:#fff;padding:30px 20px;border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,0.08);transition:var(--trans) ease;position:relative;overflow:hidden;}
+    .service-card:hover{transform:translateY(-5px) scale(1.02);}    
+    .service-card i{font-size:40px;color:var(--brand-green);margin-bottom:15px;}
+    .service-card h3{margin-bottom:10px;font-size:1.2rem;color:var(--brand-dark);}
+    .service-card p{font-size:0.95rem;margin-bottom:20px;}
+    .service-card a{display:inline-block;padding:10px 18px;font-size:0.9rem;border-radius:5px;text-decoration:none;font-weight:600;color:#fff;background:var(--brand-green);transition:var(--trans);}    
+    .service-card a:hover{background:var(--brand-lime);}
+
+    /* ------------------ TESTIMONIALS SLIDER ------------------ */
+    .testimonials-wrapper{background:var(--brand-green);color:#fff;padding:70px 20px;margin-top:60px;position:relative;}
+    .testimonials-wrapper h2{text-align:center;margin-bottom:40px;font-size:2rem;}
+    .testimonials-slider{max-width:800px;margin:auto;position:relative;overflow:hidden;}
+    .testimonial-track{display:flex;transition:transform 0.5s ease;}
+    .testimonial{min-width:100%;padding:20px;text-align:center;}
+    .testimonial p{font-size:1.05rem;margin-bottom:15px;}
+    .testimonial strong{font-size:1rem;}
+    .slider-dots{margin-top:20px;text-align:center;}
+    .slider-dots button{width:12px;height:12px;border-radius:50%;border:none;margin:0 5px;background:rgba(255,255,255,0.5);cursor:pointer;transition:var(--trans);}    
+    .slider-dots button.active{background:#fff;}
+
+    /* ------------------ CTA BANNER ------------------ */
+    .cta-banner{background:var(--brand-lime);color:#fff;text-align:center;padding:60px 20px;margin-top:60px;}
+    .cta-banner h2{font-size:2rem;margin-bottom:15px;}
+    .cta-banner p{margin-bottom:25px;font-size:1.05rem;}
+    .cta-banner a{background:#fff;color:var(--brand-green);padding:12px 24px;border-radius:5px;text-decoration:none;font-weight:bold;transition:var(--trans);}    
+    .cta-banner a:hover{background:#e8e8e8;}
+
+    /* ------------------ FOOTER ------------------ */
+    footer{background:var(--brand-dark);color:#fff;text-align:center;padding:30px 10px;margin-top:60px;}
+    footer p{margin-bottom:10px;}
+    footer .social-icons a{color:var(--brand-green);margin:0 10px;font-size:20px;transition:var(--trans);text-decoration:none;}
+    footer .social-icons a:hover{color:var(--brand-lime);}
+
+    /* ------------------ WHATSAPP FLOAT ------------------ */
+    .whatsapp-float{position:fixed;bottom:20px;right:20px;background:#25d366;color:#fff;padding:12px 16px;border-radius:50%;font-size:24px;z-index:999;box-shadow:0 2px 10px rgba(0,0,0,0.2);text-decoration:none;}
+
+    /* ------------------ RESPONSIVE ------------------ */
+    @media(max-width:768px){
+      .header-bar{padding-left:60px;flex-direction:column;gap:10px;align-items:flex-start;}
+      .hero-title{font-size:2.3rem;}
+      .hero-subtext{font-size:1rem;}
+      .services-section h2{font-size:1.8rem;}
+      .testimonials-wrapper h2{font-size:1.8rem;}
+      .cta-banner h2{font-size:1.8rem;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar toggle button -->
+  <button class="toggle-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div>
+      <div class="sidebar-header">
+        <i class="fas fa-shield-alt"></i>
+        <h2>CasanovaTech</h2>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="bookings.html">Bookings</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="sidebar-footer">© 2025 CasanovaTech</div>
+  </aside>
+
+  <!-- Popup Notifications Container -->
+  <div class="popup-wrapper" id="popup-wrapper"></div>
+
+  <!-- Header Bar -->
+  <header class="header-bar">
+    <h3>👋 Welcome to CasanovaTechSolution</h3>
+    <a class="register-top" href="register.html">Register Now</a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1 class="hero-title">Empowering Your Digital Future</h1>
+        <p class="hero-subtext">
+          <i class="fas fa-check-circle"></i> CAO Applications<br>
+          <i class="fas fa-check-circle"></i> NSFAS Support<br>
+          <i class="fas fa-check-circle"></i> CV & Cover Letter Typing<br>
+          <i class="fas fa-check-circle"></i> University & College Admissions
+        </p>
+        <div class="hero-ctas">
+          <a href="bookings.html" class="btn-primary">📅 Book Now</a>
+          <a href="about.html" class="btn-primary btn-outline">ℹ️ Learn More</a>
+        </div>
+      </div>
+      <div class="hero-graphic">
+        <img src="images/image.jpg" alt="Digital services"/>
+      </div>
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 320">
+      <path fill="#f5f5f5" fill-opacity="1" d="M0,64L60,58.7C120,53,240,43,360,58.7C480,75,600,117,720,117.3C840,117,960,75,1080,90.7C1200,107,1320,181,1380,218.7L1440,256L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+    </svg>
+  </section>
+
+  <!-- LIVE STATS STRIP -->
+  <section class="live-stats" id="live-stats">
+    <div class="stat-box">
+      <h4 id="stat-users">0</h4>
+      <p>Registered Users</p>
+    </div>
+    <div class="stat-box">
+      <h4 id="stat-bookings">0</h4>
+      <p>Total Bookings</p>
+    </div>
+    <div class="stat-box">
+      <h4 id="stat-today">0</h4>
+      <p>Bookings Today</p>
+    </div>
+    <div class="stat-box">
+      <h4 id="stat-popular">N/A</h4>
+      <p>Top Service</p>
+    </div>
+  </section>
+
+  <!-- SERVICES GRID -->
+  <section class="services-section" id="services">
+    <h2>Our Popular Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <i class="fas fa-university"></i>
+        <h3>CAO & NSFAS Applications</h3>
+        <p>Applications submitted correctly and on time. Let us handle the admin.</p>
+        <a href="bookings.html?service=CAO%20%26%20NSFAS">Book</a>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-graduation-cap"></i>
+        <h3>University Support</h3>
+        <p>Apply to top universities & colleges with professional guidance.</p>
+        <a href="bookings.html?service=University%20Support">Book</a>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-file-alt"></i>
+        <h3>CV & Document Typing</h3>
+        <p>Professional CVs, cover letters, and assignment formatting.</p>
+        <a href="bookings.html?service=CV%20%26%20Docs">Book</a>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-laptop-code"></i>
+        <h3>ICT Student Support</h3>
+        <p>Help for ICT assignments, projects, and submissions.</p>
+        <a href="bookings.html?service=ICT%20Support">Book</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SLIDER -->
+  <section class="testimonials-wrapper" id="testimonials">
+    <h2>Success Stories</h2>
+    <div class="testimonials-slider">
+      <div class="testimonial-track" id="testimonial-track">
+        <div class="testimonial">
+          <p>"CasanovaTech helped me apply to 4 colleges and get NSFAS. Stress-free!"</p>
+          <strong>- Sibusiso M.</strong>
+        </div>
+        <div class="testimonial">
+          <p>"Their CV typing service got me interviews within days. Highly recommend!"</p>
+          <strong>- Ayanda T.</strong>
+        </div>
+        <div class="testimonial">
+          <p>"Best support ever! Quick and professional. Thanks CasanovaTech!"</p>
+          <strong>- Lerato Z.</strong>
+        </div>
+      </div>
+      <div class="slider-dots" id="slider-dots"></div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <h2>Ready to Get Started?</h2>
+    <p>Choose your service, upload your documents, and let our team handle the rest!</p>
+    <a href="bookings.html">Book a Service</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 CasanovaTech-Solution. All rights reserved.</p>
+    <p>Email: <a href="mailto:CasanovaTechsolution@gmail.com" style="color:var(--brand-lime);text-decoration:none;">CasanovaTechsolution@gmail.com</a> | WhatsApp: 069 595 9841</p>
+    <div class="social-icons">
+      <a href="https://wa.me/27695959841" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Chat Button -->
+  <a href="https://wa.me/27695959841" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    /* ------------------ SIDEBAR TOGGLE ------------------ */
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('active');}
+
+    /* ------------------ POPUP NOTIFICATIONS SYSTEM ------------------ */
+    const popupQueue=[];let popupTimer=null; // queue so messages show one after another
+    function showPopup(message,type='success',duration=4000){
+      popupQueue.push({message,type,duration});
+      if(!popupTimer){processPopupQueue();}
+    }
+    function processPopupQueue(){
+      if(!popupQueue.length){popupTimer=null;return;}
+      const {message,type,duration}=popupQueue.shift();
+      const wrapper=document.getElementById('popup-wrapper');
+      const div=document.createElement('div');
+      div.className='popup '+type;div.innerHTML=message;wrapper.appendChild(div);
+      requestAnimationFrame(()=>div.classList.add('show'));
+      setTimeout(()=>{div.classList.remove('show');setTimeout(()=>{wrapper.removeChild(div);processPopupQueue();},400);},duration);
+      popupTimer=true;
+    }
+    // Example welcome message + rotating tips
+    window.addEventListener('load',()=>{
+      showPopup('Welcome to CasanovaTech! 🚀','success',5000);
+      setTimeout(()=>showPopup('Tip: Use Bookings to submit docs fast.','info'),1500);
+      setTimeout(()=>showPopup('New! ICT Project Help now available.','warning'),3000);
+    });
+
+    /* ------------------ LIVE STATS (DEMO) ------------------ */
+    // Replace with real AJAX fetch to PHP later
+    const fakeStats={users:128,bookings:342,today:7,popular:'CAO & NSFAS'};
+    function loadStats(){
+      document.getElementById('stat-users').textContent=fakeStats.users;
+      document.getElementById('stat-bookings').textContent=fakeStats.bookings;
+      document.getElementById('stat-today').textContent=fakeStats.today;
+      document.getElementById('stat-popular').textContent=fakeStats.popular;
+    }
+    document.addEventListener('DOMContentLoaded',loadStats);
+
+    /* ------------------ TESTIMONIALS SLIDER ------------------ */
+    const track=document.getElementById('testimonial-track');
+    const dotsContainer=document.getElementById('slider-dots');
+    let slideIndex=0;let slides;
+    function initSlider(){
+      slides=[...track.children];
+      slides.forEach((_,i)=>{
+        const b=document.createElement('button');
+        b.addEventListener('click',()=>goToSlide(i));
+        dotsContainer.appendChild(b);
+      });
+      updateSlider();
+      setInterval(nextSlide,6000);
+    }
+    function updateSlider(){
+      const offset=-slideIndex*100; // percentage
+      track.style.transform=`translateX(${offset}%)`;
+      [...dotsContainer.children].forEach((d,i)=>d.classList.toggle('active',i===slideIndex));
+    }
+    function goToSlide(i){slideIndex=i;updateSlider();}
+    function nextSlide(){slideIndex=(slideIndex+1)%slides.length;updateSlider();}
+    document.addEventListener('DOMContentLoaded',initSlider);
+  </script>
+</body>
+</html>

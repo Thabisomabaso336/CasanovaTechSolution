@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Documents - CasanovaTech</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      padding: 40px 20px;
+    }
+
+    .upload-container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #007BFF;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .success {
+      background: #d4edda;
+      color: #155724;
+      padding: 12px;
+      margin-top: 15px;
+      border-radius: 8px;
+      text-align: center;
+      display: none;
+    }
+
+    .error {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 12px;
+      margin-top: 15px;
+      border-radius: 8px;
+      text-align: center;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="upload-container">
+    <h2>Upload Your Documents</h2>
+    <form id="uploadForm">
+      <input type="text" name="fullname" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="text" name="idNumber" placeholder="ID / Student Number" required>
+      <input type="file" id="fileUpload" required accept=".pdf,.doc,.docx,.jpg,.png">
+
+      <button type="submit">Submit</button>
+      <div class="success" id="successMsg">✔️ Document uploaded successfully!</div>
+      <div class="error" id="errorMsg">❌ File too large! Max allowed is 5MB.</div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("uploadForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const fileInput = document.getElementById("fileUpload");
+      const file = fileInput.files[0];
+      const successMsg = document.getElementById("successMsg");
+      const errorMsg = document.getElementById("errorMsg");
+
+      // Clear messages
+      successMsg.style.display = "none";
+      errorMsg.style.display = "none";
+
+      if (file && file.size > 5 * 1024 * 1024) {
+        // File too large
+        errorMsg.style.display = "block";
+        fileInput.value = ''; // Reset file input
+      } else {
+        // Success
+        successMsg.style.display = "block";
+
+        // You would typically send the file to the server here using FormData + fetch()
+        // But for now this is front-end only
+        document.getElementById("uploadForm").reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
